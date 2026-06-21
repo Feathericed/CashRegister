@@ -39,6 +39,7 @@ public class ProductBaseAdapter extends BaseAdapter {
         View row_view = LayoutInflater.from(context).inflate(R.layout.listview_row, parent,false);
         TextView name_text = row_view.findViewById(R.id.std_list_stdName);
         TextView quantity = row_view.findViewById(R.id.quantity);
+        TextView price = row_view.findViewById(R.id.price);
 
         name_text.setText(list.get(position).name);
         quantity.setText(""+list.get(position).quantity);
