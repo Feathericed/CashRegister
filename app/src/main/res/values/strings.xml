@@ -13,6 +13,10 @@
     <string name="clear">C</string>
     <string name="buy_button">Buy</string>
     <string name="product_type">Product Type</string>
+    <string name="product_name">Product Name</string>
+    <string name="history">History</string>
     <string name="total_text">Total</string>
     <string name="quantity_text">Quantity</string>
+    <string name="price_text">Price</string>
+    <string name="manager">Manager</string>
 </resources>
