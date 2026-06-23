@@ -44,12 +44,6 @@
             app:layout_constraintTop_toTopOf="@id/row0"
             >
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/main"
-                />
             <TextView
                 android:id="@+id/selected_product"
                 android:layout_width="wrap_content"
@@ -57,6 +51,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/product_type"
+                />
+            <Button
+                android:id="@+id/manager_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manager"
                 />
         </TableRow>
 

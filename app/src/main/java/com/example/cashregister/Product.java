@@ -9,10 +9,9 @@ public class Product implements Parcelable {
 
     String name;
     int quantity;
-    float price;
+    double price;
 
-    //Bitmap std_img;// this is not primitive type so can't be parcelable
-    public Product(String name, int quantity, float price) {
+    public Product(String name, int quantity, double price) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -21,7 +20,7 @@ public class Product implements Parcelable {
     protected Product(Parcel in) {
         name = in.readString();
         quantity = in.readInt();
-        price = in.readFloat();
+        price = in.readDouble();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -45,6 +44,6 @@ public class Product implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(quantity);
-        dest.writeFloat(price);
+        dest.writeDouble(price);
     }
 }
