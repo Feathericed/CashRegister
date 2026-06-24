@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,32 +13,33 @@ public class Purchase implements Parcelable {
     String productName;
     int quantity;
     double totalAmount;
-    String purchaseDate;
+    Date purchaseDate;
 
-    public Purchase(String name, int quantity, double totalAmount) {
+    public Purchase(String name, int quantity, double totalAmount, Date now) {
         this.productName = name;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        this.purchaseDate = dateFormat.format(new Date());
+        this.purchaseDate = now;
     }
 
     protected Purchase(Parcel in) {
         productName = in.readString();
         quantity = in.readInt();
         totalAmount = in.readDouble();
-        purchaseDate = in.readString();
+        long time = in.readLong();
+        purchaseDate = new Date(time);
     }
 
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
+    public static final Creator<Purchase> CREATOR = new Creator<>() {
         @Override
-        public Product createFromParcel(Parcel in) {
-            return new Product(in);
+        public Purchase createFromParcel(Parcel in) {
+            return new Purchase(in);
         }
 
         @Override
-        public Product[] newArray(int size) {
-            return new Product[size];
+        public Purchase[] newArray(int size) {
+            return new Purchase[size];
         }
     };
 
@@ -53,6 +53,6 @@ public class Purchase implements Parcelable {
         dest.writeString(productName);
         dest.writeInt(quantity);
         dest.writeDouble(totalAmount);
-        dest.writeString(purchaseDate);
+        dest.writeLong(purchaseDate.getTime());
     }
 }

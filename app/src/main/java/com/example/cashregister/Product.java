@@ -23,7 +23,11 @@ public class Product implements Parcelable {
         price = in.readDouble();
     }
 
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<>() {
         @Override
         public Product createFromParcel(Parcel in) {
             return new Product(in);
@@ -45,5 +49,17 @@ public class Product implements Parcelable {
         dest.writeString(name);
         dest.writeInt(quantity);
         dest.writeDouble(price);
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }
