@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         lv.setAdapter(adapter);
 
-        adapter.notifyDataSetChanged();
+        refresh();
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Toast.makeText(MainActivity.this, "You clicked: " + position, Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "You clicked: " + id, Toast.LENGTH_SHORT).show();
-                product.setText(Data.products.get((int)id).name);
+                product.setText(Data.products.get(position).name);
                 // Display a quick alert pop-up message (Toast)
             } catch (Exception e) {
                 Toast.makeText(MainActivity.this, "You clicked: " + e, Toast.LENGTH_LONG).show();
@@ -125,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
             String t = total.getText().toString();
             if(!("Pants".equals(s) || "Shoes".equals(s) || "Hats".equals(s))|| t.equals("Total")){
                 Toast.makeText(MainActivity.this, "All fields are required!!!", Toast.LENGTH_SHORT).show();
-
-            }else{
+            } else if (calculate_field.getText().equals("")) {
+                Toast.makeText(MainActivity.this, "All fields are required!!!", Toast.LENGTH_SHORT).show();
+            } else {
                 String name = product.getText().toString();
                 String qty = calculate_field.getText().toString();
                 String tt = total.getText().toString();
@@ -137,8 +138,9 @@ public class MainActivity extends AppCompatActivity {
                 for (Product item: Data.products){
                     if(item.name.equals(name)){
                         item.quantity= item.quantity-Integer.parseInt(qty);
-                        adapter.notifyDataSetChanged();
-                        Date now = Calendar.getInstance().getTime();
+                        refresh();
+                        Calendar calendar = Calendar.getInstance();
+                        Date now = calendar.getTime();
                         item.setQuantity(item.quantity);
                         Data.history.add(new Purchase(name, Integer.parseInt(qty), Double.parseDouble(tt), now));
                         break;
@@ -209,78 +211,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        TextView calculate_field = findViewById(R.id.quantity);
-        TextView total = findViewById(R.id.total);
-        TextView product = findViewById(R.id.selected_product);
-
-        product.setText("");
-        calculate_field.setText("");
-        total.setText("");
+        refresh();
         Log.d("lifecycle","Main Activity - On Resume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ListView lv = findViewById(R.id.list);
-
-        ProductAdapter adapter= new ProductAdapter(this, Data.products);
-
-        lv.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-        TextView calculate_field = findViewById(R.id.quantity);
-        TextView total = findViewById(R.id.total);
-        TextView product = findViewById(R.id.selected_product);
-
-        product.setText("");
-        calculate_field.setText("");
-        total.setText("");
+        refresh();
         Log.d("lifecycle","Main Activity - On Destroy");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-
-        ListView lv = findViewById(R.id.list);
-
-        ProductAdapter adapter= new ProductAdapter(this, Data.products);
-
-        lv.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-        TextView calculate_field = findViewById(R.id.quantity);
-        TextView total = findViewById(R.id.total);
-        TextView product = findViewById(R.id.selected_product);
-
-        product.setText("");
-        calculate_field.setText("");
-        total.setText("");
+        refresh();
         Log.d("lifecycle","Main Activity - On Restart");
     }
 
     @Override
     protected void onStop() {
-
-        ListView lv = findViewById(R.id.list);
-
-        ProductAdapter adapter= new ProductAdapter(this, Data.products);
-
-        lv.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
+        refresh();
         super.onStop();
-        TextView calculate_field = findViewById(R.id.quantity);
-        TextView total = findViewById(R.id.total);
-        TextView product = findViewById(R.id.selected_product);
-
-        product.setText("");
-        calculate_field.setText("");
-        total.setText("");
         Log.d("lifecycle","Main Activity - On Stop");
     }
 
@@ -288,5 +240,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d("lifecycle","Main Activity - On Start");
+    }
+
+    protected void refresh () {
+        ListView lv = findViewById(R.id.list);
+
+        ProductAdapter adapter= new ProductAdapter(this, Data.products);
+
+        lv.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        TextView calculate_field = findViewById(R.id.quantity);
+        TextView total = findViewById(R.id.total);
+        TextView product = findViewById(R.id.selected_product);
+
+        product.setText("");
+        calculate_field.setText("");
+        total.setText("");
     }
 }

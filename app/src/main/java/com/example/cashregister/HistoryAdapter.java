@@ -4,24 +4,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
+    List<Purchase> list;
+    private int selectedPosition = -1;
+
+    private HistoryAdapter.OnItemClickListener listener;
     public HistoryAdapter(List<Purchase> list) {
-        list = Data.history;
+        this.list = list;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, qty, total;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.prodName);
-            qty = itemView.findViewById(R.id.qty);
-            total = itemView.findViewById(R.id.total);
+            name = itemView.findViewById(R.id.prodName_hist);
+            qty = itemView.findViewById(R.id.qty_hist);
+            total = itemView.findViewById(R.id.total_hist);
         }
     }
 
@@ -34,15 +36,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Purchase p = Data.history.get(position);
+        Purchase p = list.get(position);
 
         holder.name.setText(p.productName);
-        holder.qty.setText("Qty: " + p.quantity);
-        holder.total.setText("$" + p.totalAmount);
+        holder.qty.setText(String.format("%s", p.quantity));
+        holder.total.setText(String.format("%s", p.totalAmount));
     }
 
     @Override
     public int getItemCount() {
-        return Data.history.size();
+        return list.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+    public HistoryAdapter(HistoryAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
