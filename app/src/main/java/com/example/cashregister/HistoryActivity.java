@@ -50,19 +50,14 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_history);
-
         Button btnBack = findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(v -> finish());
-
         Toolbar toolbar = findViewById(R.id.my_toolbar);
-
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-
             getSupportActionBar().setTitle("Assignment_2");
-
         }
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -70,18 +65,13 @@ public class HistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         if (Data.history == null) {
-
             Data.history = new ArrayList<>();
-
         }
-
         adapter = new HistoryAdapter(Data.history);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
-
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged(); // ensures updates show when returning

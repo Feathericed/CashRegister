@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     if(item.name.equals(name)){
                         item.quantity= item.quantity-Integer.parseInt(qty);
                         adapter.notifyDataSetChanged();
-                        Date now = Calendar.getInstance().getTime();;
+                        Date now = Calendar.getInstance().getTime();
                         item.setQuantity(item.quantity);
                         Data.history.add(new Purchase(name, Integer.parseInt(qty), Double.parseDouble(tt), now));
                         break;
@@ -209,24 +209,70 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        TextView calculate_field = findViewById(R.id.quantity);
+        TextView total = findViewById(R.id.total);
+        TextView product = findViewById(R.id.selected_product);
 
+        product.setText("");
+        calculate_field.setText("");
+        total.setText("");
         Log.d("lifecycle","Main Activity - On Resume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ListView lv = findViewById(R.id.list);
+
+        ProductAdapter adapter= new ProductAdapter(this, Data.products);
+
+        lv.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        TextView calculate_field = findViewById(R.id.quantity);
+        TextView total = findViewById(R.id.total);
+        TextView product = findViewById(R.id.selected_product);
+
+        product.setText("");
+        calculate_field.setText("");
+        total.setText("");
         Log.d("lifecycle","Main Activity - On Destroy");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+
+        ListView lv = findViewById(R.id.list);
+
+        ProductAdapter adapter= new ProductAdapter(this, Data.products);
+
+        lv.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        TextView calculate_field = findViewById(R.id.quantity);
+        TextView total = findViewById(R.id.total);
+        TextView product = findViewById(R.id.selected_product);
+
+        product.setText("");
+        calculate_field.setText("");
+        total.setText("");
         Log.d("lifecycle","Main Activity - On Restart");
     }
 
     @Override
     protected void onStop() {
+
+        ListView lv = findViewById(R.id.list);
+
+        ProductAdapter adapter= new ProductAdapter(this, Data.products);
+
+        lv.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
         super.onStop();
         TextView calculate_field = findViewById(R.id.quantity);
         TextView total = findViewById(R.id.total);

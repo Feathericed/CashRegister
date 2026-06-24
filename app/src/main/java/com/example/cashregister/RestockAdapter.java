@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 public class RestockAdapter extends RecyclerView.Adapter<RestockAdapter.ViewHolder> {
 
     private int selectedPosition = -1;
@@ -26,13 +24,9 @@ public class RestockAdapter extends RecyclerView.Adapter<RestockAdapter.ViewHold
             price = itemView.findViewById(R.id.priceRest);
         }
     }
-
     public interface OnItemClickListener {
-
         void onItemClick(int position);
-
     }
-
     public RestockAdapter(OnItemClickListener listener) {
         this.listener = listener;
     }
@@ -66,11 +60,9 @@ public class RestockAdapter extends RecyclerView.Adapter<RestockAdapter.ViewHold
                 listener.onItemClick(pos);
             }
 
-
             notifyItemChanged(oldPos);
             notifyItemChanged(pos);
         });
-
     }
 
     @Override

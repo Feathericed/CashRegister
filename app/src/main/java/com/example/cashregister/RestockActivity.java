@@ -116,7 +116,5 @@ public class RestockActivity extends AppCompatActivity {
 
         });
         btnCancel.setOnClickListener(v -> finish());
-
     }
-
 }
