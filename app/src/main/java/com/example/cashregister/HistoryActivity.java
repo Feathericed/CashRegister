@@ -49,6 +49,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> finish());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Assignment_2");
+        }
+
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,13 +62,6 @@ public class HistoryActivity extends AppCompatActivity {
         }
         adapter = new HistoryAdapter(Data.history);
         recyclerView.setAdapter(adapter);
-
-        Toolbar toolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Assignment_2 - History");
-        }
     }
 
     @Override
