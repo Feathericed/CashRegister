@@ -1,6 +1,5 @@
 package com.example.cashregister;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -60,22 +59,18 @@ public class RestockActivity extends AppCompatActivity {
         edtQuantity = findViewById(R.id.edtQuantity);
 
         Button btnOk = findViewById(R.id.btnOk);
-
         Button btnCancel = findViewById(R.id.btnCancel);
-
         Toolbar toolbar = findViewById(R.id.my_toolbar);
 
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Assignment_2");
+            getSupportActionBar().setTitle("Assignment_2 - Restock");
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        RestockAdapter adapter = new RestockAdapter(position -> {
-            selectedIndex = position;
-        });
+        RestockAdapter adapter = new RestockAdapter(this::onItemClick);
 
         recyclerView.setAdapter(adapter);
 
@@ -116,5 +111,9 @@ public class RestockActivity extends AppCompatActivity {
 
         });
         btnCancel.setOnClickListener(v -> finish());
+    }
+
+    private void onItemClick(int position) {
+        selectedIndex = position;
     }
 }

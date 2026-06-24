@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             curChar= myStr.toCharArray();
         }
     }
-    boolean checkProdValid(TextView product, TextView calculate_field){
+    void checkProdValid(TextView product, TextView calculate_field){
         String s = product.getText().toString();
         boolean rtn= "Pants".equals(s) || "Shoes".equals(s) || "Hats".equals(s);
         if (rtn){
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Please select product", Toast.LENGTH_SHORT).show();
             curChar= new char[]{'0'};
         }
-        return rtn;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Assignment_2");
+            getSupportActionBar().setTitle("Assignment_2 - Cash Register");
         }
 
         Button button_0 = findViewById(R.id.b0);
@@ -118,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Toast.makeText(MainActivity.this, "You clicked: " + e, Toast.LENGTH_LONG).show();
             }
-            });
+        });
+
         button_enter.setOnClickListener(v -> {
             String s = product.getText().toString();
             TextView total = findViewById(R.id.total);
@@ -142,7 +142,16 @@ public class MainActivity extends AppCompatActivity {
                         Calendar calendar = Calendar.getInstance();
                         Date now = calendar.getTime();
                         item.setQuantity(item.quantity);
-                        Data.history.add(new Purchase(name, Integer.parseInt(qty), Double.parseDouble(tt), now));
+
+                        double totalValue;
+
+                        if (!tt.isEmpty()) {
+                            totalValue = Double.parseDouble(tt);
+                            Data.history.add(new Purchase(name, Integer.parseInt(qty),
+                                    totalValue, now));
+                        } else {
+                            Toast.makeText(this, "Error: Invalid Input", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     }
                 }
@@ -255,8 +264,8 @@ public class MainActivity extends AppCompatActivity {
         TextView total = findViewById(R.id.total);
         TextView product = findViewById(R.id.selected_product);
 
-        product.setText("");
-        calculate_field.setText("");
-        total.setText("");
+        product.setText(null);
+        calculate_field.setText(null);
+        total.setText(null);
     }
 }

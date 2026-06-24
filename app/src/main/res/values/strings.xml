@@ -29,4 +29,10 @@
     <string name="enter_quantity">Enter quantity</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="product_label">Product: %1$s</string>
+    <string name="quantity_label">Quantity: %1$d</string>
+    <string name="total_label">Total: $%1$.2f</string>
+    <string name="date_label">Date: %1$s</string>
+    <string name="qty_label">Qty: %1$d</string>
+    <string name="price_label">Price: $%1$.2f</string>
 </resources>

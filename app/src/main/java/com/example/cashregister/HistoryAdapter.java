@@ -1,18 +1,19 @@
 package com.example.cashregister;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     List<Purchase> list;
-    private int selectedPosition = -1;
 
-    private HistoryAdapter.OnItemClickListener listener;
     public HistoryAdapter(List<Purchase> list) {
         this.list = list;
     }
@@ -27,6 +28,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         }
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -41,17 +43,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.name.setText(p.productName);
         holder.qty.setText(String.format("%s", p.quantity));
         holder.total.setText(String.format("%s", p.totalAmount));
+
+        holder.itemView.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+
+            Intent intent = new Intent(v.getContext(), HistoryDetails.class);
+            intent.putExtra("purchase", list.get(pos));
+            v.getContext().startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-    public HistoryAdapter(HistoryAdapter.OnItemClickListener listener) {
-        this.listener = listener;
     }
 }

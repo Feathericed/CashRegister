@@ -2,12 +2,8 @@ package com.example.cashregister;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class Purchase implements Parcelable {
     String productName;
@@ -19,7 +15,6 @@ public class Purchase implements Parcelable {
         this.productName = name;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         this.purchaseDate = now;
     }
 
