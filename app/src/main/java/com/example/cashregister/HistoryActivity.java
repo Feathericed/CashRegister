@@ -49,6 +49,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> finish());
 
+        Toolbar toolbar = findViewById(R.id.my_toolbar_hist);
+
+        setSupportActionBar(toolbar);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Assignment_2");
         }

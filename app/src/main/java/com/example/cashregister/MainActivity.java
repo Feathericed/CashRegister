@@ -123,7 +123,17 @@ public class MainActivity extends AppCompatActivity {
             String s = product.getText().toString();
             TextView total = findViewById(R.id.total);
             String t = total.getText().toString();
-            if(!("Pants".equals(s) || "Shoes".equals(s) || "Hats".equals(s))|| t.equals("Total")){
+
+            boolean productVerify = false;
+
+            for (Product item: Data.products) {
+                if (item.name.equals(s)) {
+                    productVerify = true;
+                    break;
+                }
+            }
+
+            if(!(productVerify || "Total".equals(t))) {
                 Toast.makeText(MainActivity.this, "All fields are required!!!", Toast.LENGTH_SHORT).show();
             } else if (calculate_field.getText().equals("")) {
                 Toast.makeText(MainActivity.this, "All fields are required!!!", Toast.LENGTH_SHORT).show();

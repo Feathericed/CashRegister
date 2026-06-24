@@ -24,7 +24,7 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Assignment_2 - Management Menu");
+            getSupportActionBar().setTitle("Assignment_2 - Management");
         }
 
         btnHistory.setOnClickListener(v -> {
