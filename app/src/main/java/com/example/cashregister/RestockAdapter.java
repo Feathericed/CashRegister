@@ -44,8 +44,14 @@ public class RestockAdapter extends RecyclerView.Adapter<RestockAdapter.ViewHold
 
         Product p = Data.products.get(position);
         holder.name.setText(p.getName());
-        holder.qty.setText("Qty: " + p.getQuantity());
-        holder.price.setText("$" + p.getPrice());
+        holder.qty.setText(
+                holder.itemView.getContext()
+                        .getString(R.string.quantity_label, p.getQuantity())
+        );
+        holder.price.setText(
+                holder.itemView.getContext()
+                        .getString(R.string.price_label, p.getPrice())
+        );
 
         holder.itemView.setAlpha(selectedPosition == position ? 1.0f : 0.6f);
 

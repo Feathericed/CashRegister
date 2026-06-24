@@ -3,17 +3,12 @@ package com.example.cashregister;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class MenuActivity extends AppCompatActivity {
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -45,5 +40,4 @@ public class MenuActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
     }
-
 }
