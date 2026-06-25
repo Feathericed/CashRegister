@@ -13,8 +13,8 @@ public class RestockAdapter extends RecyclerView.Adapter<RestockAdapter.ViewHold
 
     private final OnItemClickListener listener;
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, qty, price;
-        public View layout;
+        final TextView name, qty, price;
+        final public View layout;
 
         public ViewHolder(View itemView) {
             super(itemView);

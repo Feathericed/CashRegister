@@ -13,7 +13,7 @@ public class MenuActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_manage);
 
         Button btnHistory = findViewById(R.id.btnHistory);
         Button btnRestock = findViewById(R.id.btnRestock);

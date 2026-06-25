@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
     }
     void checkProdValid(TextView product, TextView calculate_field){
         String s = product.getText().toString();
-        boolean rtn= "Pants".equals(s) || "Shoes".equals(s) || "Hats".equals(s);
+        boolean rtn= false;
+        for (Product item: Data.products) {
+            if (item.name.equals(s)) {
+                rtn = true;
+                break;
+            }
+        }
         if (rtn){
             calculate_field.setText(new String(curChar));
             TextView total = findViewById(R.id.total);
@@ -110,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener((parent, view, position, id) -> {
             // Get the clicked item string based on its position index
             try {
-                Toast.makeText(MainActivity.this, "You clicked: " + position, Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "You clicked: " + id, Toast.LENGTH_SHORT).show();
                 product.setText(Data.products.get(position).name);
                 // Display a quick alert pop-up message (Toast)
             } catch (Exception e) {
@@ -141,17 +145,19 @@ public class MainActivity extends AppCompatActivity {
                 String name = product.getText().toString();
                 String qty = calculate_field.getText().toString();
                 String tt = total.getText().toString();
-                new AlertDialog.Builder(this).setTitle("Thank you for your purchase")
-                        .setMessage("Your purchase is "+qty+" "+ name +" for "+ tt)
-                        .setPositiveButton("OK",null)
-                        .show();
+
                 for (Product item: Data.products){
-                    if(item.name.equals(name)){
+                    if(item.name.equals(name) && Integer.parseInt(qty) <= item.quantity){
                         item.quantity= item.quantity-Integer.parseInt(qty);
                         refresh();
                         Calendar calendar = Calendar.getInstance();
                         Date now = calendar.getTime();
                         item.setQuantity(item.quantity);
+
+                        new AlertDialog.Builder(this).setTitle("Thank you for your purchase")
+                                .setMessage("Your purchase is "+qty+" "+ name +" for "+ tt)
+                                .setPositiveButton("OK",null)
+                                .show();
 
                         double totalValue;
 
@@ -216,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button_mode.setOnClickListener(v -> {
-            Intent gotoHistory = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(gotoHistory);
+            Intent gotoMenu = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(gotoMenu);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

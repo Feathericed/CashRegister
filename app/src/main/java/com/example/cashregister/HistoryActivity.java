@@ -1,5 +1,6 @@
 package com.example.cashregister;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -64,7 +65,12 @@ public class HistoryActivity extends AppCompatActivity {
         if (Data.history == null) {
             Data.history = new ArrayList<>();
         }
-        adapter = new HistoryAdapter(Data.history);
+        adapter = new HistoryAdapter(Data.history, purchase -> {
+            Intent intent = new Intent(HistoryActivity.this, HistoryDetails.class);
+            intent.putExtra("purchase", purchase);
+            startActivity(intent);
+
+        });
         recyclerView.setAdapter(adapter);
     }
 

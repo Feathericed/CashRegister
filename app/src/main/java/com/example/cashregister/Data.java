@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Data {
     public static ArrayList<Purchase> history = new ArrayList<>();
-    public static ArrayList<Product> products = new ArrayList<>();
+    public static final ArrayList<Product> products = new ArrayList<>();
 
     static {
 

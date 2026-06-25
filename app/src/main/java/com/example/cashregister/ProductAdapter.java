@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
-    Context context;
-    List<Product> products;
+    final Context context;
+    final List<Product> products;
     public ProductAdapter(Context context, List<Product> products){
         super(context,0,products);
         this.context=context;

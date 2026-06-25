@@ -6,10 +6,10 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 
 public class Purchase implements Parcelable {
-    String productName;
-    int quantity;
-    double totalAmount;
-    Date purchaseDate;
+    final String productName;
+    final int quantity;
+    final double totalAmount;
+    final Date purchaseDate;
 
     public Purchase(String name, int quantity, double totalAmount, Date now) {
         this.productName = name;

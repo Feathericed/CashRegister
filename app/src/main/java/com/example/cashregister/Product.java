@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 
 public class Product implements Parcelable {
 
-    String name;
+    final String name;
     int quantity;
-    double price;
+    final double price;
 
     public Product(String name, int quantity, double price) {
         this.name = name;
@@ -26,6 +26,8 @@ public class Product implements Parcelable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    //public void setName(String name) {this.name = name;};
+    //public void setPrice(double price) {this.price = price;};
 
     public static final Creator<Product> CREATOR = new Creator<>() {
         @Override

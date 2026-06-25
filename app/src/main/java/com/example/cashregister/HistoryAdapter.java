@@ -1,6 +1,5 @@
 package com.example.cashregister;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,16 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-    List<Purchase> list;
+    final List<Purchase> list;
+    private final OnItemClickListener listener;
 
-    public HistoryAdapter(List<Purchase> list) {
+    public HistoryAdapter(List<Purchase> list, OnItemClickListener listener) {
         this.list = list;
+        this.listener = listener;
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, qty, total;
+        final TextView name, qty, total;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -26,6 +28,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             qty = itemView.findViewById(R.id.qty_hist);
             total = itemView.findViewById(R.id.total_hist);
         }
+    }
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Purchase history);
     }
 
     @NonNull
@@ -36,6 +43,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Purchase p = list.get(position);
@@ -45,11 +53,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.total.setText(String.format("%s", p.totalAmount));
 
         holder.itemView.setOnClickListener(v -> {
-            int pos = holder.getAdapterPosition();
-
-            Intent intent = new Intent(v.getContext(), HistoryDetails.class);
-            intent.putExtra("purchase", list.get(pos));
-            v.getContext().startActivity(intent);
+            if (listener != null) {
+                listener.onItemClick(p);
+            }
         });
     }
 

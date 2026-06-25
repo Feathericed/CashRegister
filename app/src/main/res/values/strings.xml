@@ -14,14 +14,11 @@
     <string name="buy_button">Buy</string>
     <string name="product_type">Product Type</string>
     <string name="product_name">Product Name</string>
-    <string name="history">History</string>
     <string name="total_text">Total</string>
     <string name="quantity_text">Quantity</string>
     <string name="price_text">Price</string>
     <string name="manager">Manager</string>
     <string name="total">Total</string>
-    <string name="date_text" />
-    <string name="restock">Restock</string>
     <string name="view_history">View History</string>
     <string name="restock_items">Restock Items</string>
     <string name="back">Back</string>
